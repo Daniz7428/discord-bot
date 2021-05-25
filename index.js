@@ -10,9 +10,6 @@ client.on('ready', () => {
 
 	privateMessage(client, 'caca', 'vas a quedar baniado por desir caca')
 
-	client.users.fetch('644798160291627028').then((user) => {
-		user.send('hola')
-	})
 
 	command(client, 'caca', message => {
 		message.channel.send('cacota')
