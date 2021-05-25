@@ -2,9 +2,12 @@ const Discord = require('discord.js')
 const client = new Discord.Client()
 
 const config = require('./config.json')
+const firstMessage = require('./first-message')
 const command = require('./command')
 client.on('ready', () => {
 	console.log('Ta ready pibe')
+
+	firstMessage(client, '845296583880212500', 'buenos dias', ['🔥'])
 
 	command(client, 'caca', message => {
 		message.channel.send('cacota')
