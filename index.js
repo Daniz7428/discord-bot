@@ -10,6 +10,36 @@ client.on('ready', () => {
 
 		privateMessage(client, 'caca', 'vas a quedar baniado por desir caca')
 
+	command(client, 'serverinfo', (message) => {
+		const { guild } = message
+	
+		const { name, region, memberCount, owner, afkTimeout} = guild
+		const icon = guild.iconURL()
+
+		const embed = new Discord.MessageEmbed()
+			.setTitle(`Server info for "${name}"`)
+			.setThumbnail(icon)
+			.addFields({
+				name: 'Region',
+				value: region,
+			},
+			{
+				name: 'Members',
+				value: memberCount,
+			},
+			{
+				name: 'Owner',
+				value: owner.user.tag,
+			},
+			{
+				name: 'AFK Timeout',
+				value: afkTimeout / 60,
+			},)
+
+		message.channel.send(embed)
+	})
+
+
 	command(client, 'embed', (message) => {
 		const logo = 'https://miracomosehace.com/wp-content/uploads/2020/07/icono-de-github.jpg'
 
