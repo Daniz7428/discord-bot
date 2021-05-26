@@ -14,3 +14,4 @@
 - servers (Muestra las persona actuales del servidor) 
 - estado (Cambia el estado del bot) (Syntax: estado "estado que quieres")
 - cc/clearchannel (borra el contenido del canal actual)
+- serverinfo (Muestra informacion sobre el servidor)
