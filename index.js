@@ -8,6 +8,42 @@ const command = require('./command')
 client.on('ready', () => {
 	console.log('Ta ready pibe')
 
+		privateMessage(client, 'caca', 'vas a quedar baniado por desir caca')
+
+	command(client, 'embed', (message) => {
+		const logo = 'https://miracomosehace.com/wp-content/uploads/2020/07/icono-de-github.jpg'
+
+		const embed = new Discord.MessageEmbed()
+			.setTitle('El github de este bot')
+			.setURL('https://github.com/Daniz7428/discord-bot')
+			.setAuthor(message.author.username)
+			.setImage(logo)
+			.setThumbnail(logo)
+			.setFooter('This is a footer')
+			.setColor('#00AAFF')
+			.addFields({
+				name: 'Field 1',
+				value: 'Hello world',
+				inline: true,
+			},
+			{
+				name: 'Field 2',
+				value: 'Hello world',
+				inline: true,
+			},
+			{
+				name: 'Field 3',
+				value: 'Hello world',
+				inline: true,
+			},
+			{
+				name: 'Field 4',
+				value: 'Hello world',
+			})
+
+		message.channel.send(embed)
+	})
+
 	command(client, 'ctc', (message) => {
 		const name = message.content.replace('{ctc ', '')
 
@@ -34,9 +70,6 @@ client.on('ready', () => {
 			channel.setParent(categoryId)
 		})
 	})
-
-
-	privateMessage(client, 'caca', 'vas a quedar baniado por desir caca')
 
 
 	command(client, 'caca', message => {
