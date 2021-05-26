@@ -2,13 +2,39 @@ const Discord = require('discord.js')
 const client = new Discord.Client()
 
 const config = require('./config.json')
+const roleClaim = require('./role-claim')
 const firstMessage = require('./first-message')
 const privateMessage = require('./private-message')
 const command = require('./command')
 client.on('ready', () => {
 	console.log('Ta ready pibe')
 
-		privateMessage(client, 'caca', 'vas a quedar baniado por desir caca')
+	roleClaim(client)
+
+
+
+	const { prefix } = config
+
+	client.user.setPresence({
+		activity: {
+			name: `"${prefix}help" para ayuda`
+		}
+	})
+
+
+	command(client, 'help', (message) => {
+		message.channel.send(`
+		Estos son los comandos de este bot:
+
+		**{help** - ayuda sobre el servidor
+		**{cc** - borra el contenido del canal en el que se escribe
+		**{cvc <nombre>** - Crea un canal de voz
+		**{ctc <nombre>** - Crea un canal de texto
+		**{serverinfo** - Muestra informacion del servidor
+		**{estado <contenido>** - Cambia el estado del bot
+		`)
+	})
+
 
 	command(client, 'serverinfo', (message) => {
 		const { guild } = message
