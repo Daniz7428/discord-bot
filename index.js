@@ -8,6 +8,34 @@ const command = require('./command')
 client.on('ready', () => {
 	console.log('Ta ready pibe')
 
+	command(client, 'ctc', (message) => {
+		const name = message.content.replace('{ctc ', '')
+
+
+		message.guild.channels
+		.create(name, {
+			type: 'text'
+		}).then(channel => {
+			const categoryId = '846999104134316073'
+			channel.setParent(categoryId)
+		})
+	})
+
+	command(client, 'cvc', (message) => {
+		const name = message.content.replace('{cvc ', '')
+
+		message.guild.channels
+		.create(name, {
+			type: "voice"
+		})
+		.then((channel) => {
+			channel.setUserLimit(10)
+			const categoryId = '846999104134316073'
+			channel.setParent(categoryId)
+		})
+	})
+
+
 	privateMessage(client, 'caca', 'vas a quedar baniado por desir caca')
 
 
