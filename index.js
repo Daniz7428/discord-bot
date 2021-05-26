@@ -3,6 +3,7 @@ const client = new Discord.Client()
 
 const config = require('./config.json')
 const roleClaim = require('./role-claim')
+const poll = require('./polls')
 const firstMessage = require('./first-message')
 const privateMessage = require('./private-message')
 const command = require('./command')
@@ -10,6 +11,7 @@ client.on('ready', () => {
 	console.log('Ta ready pibe')
 
 	roleClaim(client)
+	poll(client)
 
 	const { prefix } = config
 
