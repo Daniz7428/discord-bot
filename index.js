@@ -11,13 +11,57 @@ client.on('ready', () => {
 
 	roleClaim(client)
 
-
-
 	const { prefix } = config
 
 	client.user.setPresence({
 		activity: {
 			name: `"${prefix}help" para ayuda`
+		}
+	})
+
+	command(client, 'ban', (message) => {
+		const { member, mentions } = message
+
+		const tag = `<@${member.id}>`
+
+		if(member.hasPermission('ADMIN') || 
+		member.hasPermission('BAN_MEMBERS')){ 
+			const target = mentions.users.first()
+		
+			if(target){
+				const targetMember = message.guild.members.cache.get(target.id)
+				targetMember.kick()
+				message.channel.send(`${tag} Ha sido banneado`)
+			}
+			else{
+				message.channel.send(`${tag} Porfavor, indica a algun usuario`)
+			}
+		}
+		else {
+			message.channel.send(`${tag} No tienes permisos para usar este comando`)
+		}
+	})
+
+		command(client, 'kick', (message) => {
+		const { member, mentions } = message
+
+		const tag = `<@${member.id}>`
+
+		if(member.hasPermission('ADMIN') || 
+		member.hasPermission('KICK_MEMBERS')){ 
+			const target = mentions.users.first()
+		
+			if(target){
+				const targetMember = message.guild.members.cache.get(target.id)
+				targetMember.ban()
+				message.channel.send(`${tag} Ha sido expulsado`)
+			}
+			else{
+				message.channel.send(`${tag} Porfavor, indica a algun usuario`)
+			}
+		}
+		else {
+			message.channel.send(`${tag} No tienes permisos para usar este comando`)
 		}
 	})
 
@@ -32,6 +76,8 @@ client.on('ready', () => {
 		**{ctc <nombre>** - Crea un canal de texto
 		**{serverinfo** - Muestra informacion del servidor
 		**{estado <contenido>** - Cambia el estado del bot
+		**{ban <@usuario>** Bannea a una persona del servidor
+		**{kick <@usuario>** Expulsado a una persona del servidor
 		`)
 	})
 
