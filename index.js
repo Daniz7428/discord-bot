@@ -1,18 +1,21 @@
 const Discord = require('discord.js')
 const client = new Discord.Client()
 
+require('events').EventEmitter.defaultMaxListeners = Infinity; 
 const config = require('./config.json')
 const roleClaim = require('./role-claim')
 const poll = require('./polls')
+const welcome	= require('./welcome')
 const firstMessage = require('./first-message')
 const privateMessage = require('./private-message')
 const command = require('./command')
 client.on('ready', () => {
 	console.log('Ta ready pibe')
-
+ 	
+	welcome(client)
 	roleClaim(client)
 	poll(client)
-
+	
 	const { prefix } = config
 
 	client.user.setPresence({
@@ -33,7 +36,7 @@ client.on('ready', () => {
 			if(target){
 				const targetMember = message.guild.members.cache.get(target.id)
 				targetMember.kick()
-				message.channel.send(`${tag} Ha sido banneado`)
+				message.channel.send(`${tag} El usuario ha sido banneado`)
 			}
 			else{
 				message.channel.send(`${tag} Porfavor, indica a algun usuario`)
@@ -56,7 +59,7 @@ client.on('ready', () => {
 			if(target){
 				const targetMember = message.guild.members.cache.get(target.id)
 				targetMember.ban()
-				message.channel.send(`${tag} Ha sido expulsado`)
+				message.channel.send(`${tag} El usuario ha sido expulsado`)
 			}
 			else{
 				message.channel.send(`${tag} Porfavor, indica a algun usuario`)
