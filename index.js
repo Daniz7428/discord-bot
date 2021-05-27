@@ -19,6 +19,7 @@ client.on('ready', () => {
 	 //comandos en archivos aparte
 	memberCount(client)
 	roleClaim(client)
+	poll(client)
 
 	//estado
 	const { prefix } = config
