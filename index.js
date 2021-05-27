@@ -1,6 +1,7 @@
 const Discord = require('discord.js')
 const client = new Discord.Client()
 
+//archivos
 require('events').EventEmitter.defaultMaxListeners = Infinity; 
 const config = require('./config.json')
 const roleClaim = require('./role-claim')
@@ -10,12 +11,16 @@ const welcome	= require('./welcome')
 const firstMessage = require('./first-message')
 const privateMessage = require('./private-message')
 const command = require('./command')
+
+//comandos
 client.on('ready', () => {
 	console.log('Ta ready pibe')
  	
+	 //comandos en archivos aparte
 	memberCount(client)
 	roleClaim(client)
 
+	//estado
 	const { prefix } = config
 
 	client.user.setPresence({
@@ -23,6 +28,18 @@ client.on('ready', () => {
 			name: `"${prefix}help" para ayuda`
 		}
 	})
+
+		command(client, 'estado', message => {
+		const content = message.content.replace('{estado ', '')
+		client.user.setPresence({
+			activity: {
+				name: content,
+				type: 0
+			},
+		})	
+	})
+
+	//Ban & kick
 
 	command(client, 'ban', (message) => {
 		const { member, mentions } = message
@@ -70,6 +87,7 @@ client.on('ready', () => {
 		}
 	})
 
+	//ayuda e informacion
 
 	command(client, 'help', (message) => {
 		message.channel.send(`
@@ -117,13 +135,7 @@ client.on('ready', () => {
 	})
 
 
-	command(client, 'embed', (message) => {
-		const logo = 'https://miracomosehace.com/wp-content/uploads/2020/07/icono-de-github.jpg'
-
-
-
-		message.channel.send(embed)
-	})
+	//Herramientas para canales
 
 	command(client, 'ctc', (message) => {
 		const name = message.content.replace('{ctc ', '')
@@ -153,16 +165,6 @@ client.on('ready', () => {
 	})
 
 
-	command(client, 'caca', message => {
-		message.channel.send('cacota')
-	})
-	command(client, 'servers', message =>{
-		client.guilds.cache.forEach((guild) => {
-			message.channel.send(`${guild.name} tiene un total de ${guild.memberCount} miembros`
-			)
-		})
-	})
-
 	command(client, ['cc', 'clearchannel'], message =>{
 		if (message.member.hasPermission('ADMINISTRATOR')){
 			message.channel.messages.fetch().then(results => {
@@ -171,15 +173,6 @@ client.on('ready', () => {
 		}
 	})
 
-	command(client, 'estado', message => {
-		const content = message.content.replace('{estado ', '')
-		client.user.setPresence({
-			activity: {
-				name: content,
-				type: 0
-			},
-		})	
-	})
 
 })
 client.login(config.token)
