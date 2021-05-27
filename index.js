@@ -4,6 +4,7 @@ const client = new Discord.Client()
 require('events').EventEmitter.defaultMaxListeners = Infinity; 
 const config = require('./config.json')
 const roleClaim = require('./role-claim')
+const memberCount = require('./member-count')
 const poll = require('./polls')
 const welcome	= require('./welcome')
 const firstMessage = require('./first-message')
@@ -12,10 +13,9 @@ const command = require('./command')
 client.on('ready', () => {
 	console.log('Ta ready pibe')
  	
-	welcome(client)
+	memberCount(client)
 	roleClaim(client)
-	poll(client)
-	
+
 	const { prefix } = config
 
 	client.user.setPresence({
