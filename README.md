@@ -1,4 +1,5 @@
 # discord-bot
+# Actualmente online en una raspberry
 
 ## Este es mi bot de discord que creare en _chromebook_
 
